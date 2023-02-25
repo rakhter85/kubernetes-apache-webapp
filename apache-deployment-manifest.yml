@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apache-deployment  # Name of the deployment
+  labels:
+    app: apache-app        # tags
+spec:
+  replicas: 5             # Number of PODS running at all time
+  selector:               # filter to select the specified label/tag (POD) that you want the deployment to manage
+    matchLabels:
+      app: apache-app
+  template:              # POD specification (config) image
+    metadata:
+      labels:
+        app: apache-app  # label we set for the POD
+    spec:
+      containers:
+      - name: apache-app
+        image: rok2020/rok_apache_image:v1.0.1
+        ports:
+        - containerPort: 80
